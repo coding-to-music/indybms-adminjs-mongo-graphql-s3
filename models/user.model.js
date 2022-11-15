@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
-  username: {
+  email: {
     type: String,
     required: true,
     unique: true
@@ -13,6 +13,26 @@ const UserSchema = mongoose.Schema({
   name: {
     type: String,
     required: true
+  },
+  phone: {
+    type: String,
+    required: true
+  },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
+  },
+  privillege: {
+    type: String,
+    enum: ['USER', 'ORGANIZER', 'ADMIN'],
+    default: 'USER'
   },
   events: [
     {
