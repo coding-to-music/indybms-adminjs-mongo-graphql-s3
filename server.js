@@ -4,24 +4,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const compression = require('compression');
+const helmet = require('helmet');
 const session = require('express-session')
 const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
-
-// TEMP
-// Construct a schema, using GraphQL schema language
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
-
-// Provide resolver functions for your schema fields
-var root = {
-  hello: () => {
-    return 'Hello world!';
-  },
-};
+const { schema } = require('./graphql');
 
 const AdminJS = require('adminjs')
 const AdminJSExpress = require('@adminjs/express')
@@ -38,6 +24,7 @@ app.use(compression());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
+app.use(helmet());
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
@@ -48,20 +35,19 @@ app.use(
 );
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
   graphiql: true,
 }));
 
-// mongoose.connect(
-//   db,
-//   { useNewUrlParser: true, useUnifiedTopology: true },
-//   err => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     console.log('Connected to DB');
-//   }
-// );
+mongoose.connect(
+  db,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  err => {
+    if (err) {
+      console.log(err);
+    }
+    console.log('Connected to DB');
+  }
+);
 
 // ADMIN
 const admin = new AdminJS({})
