@@ -38,7 +38,7 @@ app.use(compression());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
-app.use(helmet());
+// app.use(helmet());
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
