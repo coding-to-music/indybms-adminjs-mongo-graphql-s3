@@ -34,13 +34,13 @@ const UserSchema = mongoose.Schema({
     enum: ['USER', 'ORGANIZER', 'ADMIN'],
     default: 'USER'
   },
-  events: [
+  createdEvents: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Event'
     }
   ],
-  registered: [
+  registeredEvents: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Event'
