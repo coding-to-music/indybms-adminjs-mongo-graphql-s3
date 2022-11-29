@@ -78,7 +78,7 @@ const EventSchema = mongoose.Schema({
   // Event Status
   status: {
     type: String,
-    enum: ['PENDING', 'REJECTED', 'APPROVED', 'COMPLETED', 'UPCOMING', 'INPROGRESS'],
+    enum: ['PENDING', 'REQUESTED CHANGES', 'REJECTED', 'APPROVED', 'COMPLETED', 'UPCOMING', 'INPROGRESS'],
     default: 'PENDING'
   },
   // Event Registration Fee

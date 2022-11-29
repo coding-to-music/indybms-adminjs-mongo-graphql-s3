@@ -7,6 +7,7 @@ const CategorySchema = mongoose.Schema({
     type: String,
     required: true
   },
+  // Events within a Category
   events: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -15,4 +16,4 @@ const CategorySchema = mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model('Event', EventSchema);
+module.exports = mongoose.model('Category', CategorySchema);
