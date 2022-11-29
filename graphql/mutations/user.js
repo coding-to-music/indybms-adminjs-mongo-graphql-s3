@@ -1,5 +1,20 @@
 const { UserType } = require('../types');
 const { UserInputType } = require('../inputs');
+const { UserController } = require('../../controllers');
+
+const createUser = {
+  type: UserType,
+  description: 'The mutation that allows you to create a new user',
+  args: {
+    user: {
+      name: 'user',
+      type: UserInputType('create'),
+    },
+  },
+  resolve: async (_, { user }) => {
+    return UserController.register(user);
+  },
+};
 
 const updateUser = {
   type: UserType,
@@ -14,5 +29,6 @@ const updateUser = {
 };
 
 module.exports = {
+  createUser,
   updateUser,
 }

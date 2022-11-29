@@ -1,29 +1,40 @@
 const {
   GraphQLInputObjectType,
   GraphQLInt,
-  GraphQLNonNull,
   GraphQLString,
+  GraphQLFloat,
 } = require('graphql');
 
 
 const UserInputType = (type) => {
   let allGraphFields = {};
   const standardGraphFields = {
-    id: {
-      type: new GraphQLNonNull(GraphQLInt),
+    email: {
+      type: GraphQLString,
+    },
+    name: {
+      type: GraphQLString,
+    },
+    phone: {
+      type: GraphQLString,
     },
   };
 
   switch (type) {
+    case 'create':
+      allGraphFields = {
+        ...standardGraphFields,
+        password: {
+          type: GraphQLString,
+        },
+      };
+      break;
     case 'update':
       allGraphFields = {
         ...standardGraphFields,
-        username: {
+        privilege: {
           type: GraphQLString,
-        },
-        email: {
-          type: GraphQLString,
-        },
+        }
       };
       break;
     default:

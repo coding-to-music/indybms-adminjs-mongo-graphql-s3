@@ -3,6 +3,7 @@ const {
 } = require('graphql');
 
 const { UserType } = require('../types');
+const { UserController } = require('../../controllers/index');
 
 const getUserQuery = {
   type: UserType,
@@ -16,7 +17,9 @@ const getUserQuery = {
       type: GraphQLString,
     },
   },
-  resolve: (user, { id, email }) => {},
+  resolve: (_, { id, email }) => {
+    return UserController.findUserById(id);
+  },
 };
 
 module.exports = { getUserQuery };

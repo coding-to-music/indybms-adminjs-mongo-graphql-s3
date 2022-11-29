@@ -18,17 +18,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  location: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      required: true
-    },
-    coordinates: {
-      type: [Number],
-      required: true
-    }
-  },
   privilege: {
     type: String,
     enum: ['USER', 'ORGANIZER', 'ADMIN'],

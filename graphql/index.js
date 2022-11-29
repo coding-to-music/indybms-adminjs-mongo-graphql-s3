@@ -5,6 +5,7 @@ const {
 
 const { getUserQuery } = require('./queries');
 const {
+  createUser,
   updateUser,
 } = require('./mutations');
 
@@ -20,6 +21,7 @@ const RootMutation = new GraphQLObjectType({
   name: 'rootMutation',
   description: 'This is the root mutation which holds all possible WRITE entrypoints for the GraphQL API',
   fields: () => ({
+    createUser,
     updateUser,
   }),
 });
