@@ -29,12 +29,18 @@ const UserSchema = mongoose.Schema({
       required: true
     }
   },
-  privillege: {
+  privilege: {
     type: String,
     enum: ['USER', 'ORGANIZER', 'ADMIN'],
     default: 'USER'
   },
   events: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event'
+    }
+  ],
+  registered: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Event'
