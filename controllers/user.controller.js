@@ -1,6 +1,6 @@
 const { User } = require("../models/index");
 const { UserValidation } = require("../middleware/index");
-// const {} = require()
+const bcrypt = require('bcryptjs')
 
 let Controller = {};
 
@@ -10,12 +10,12 @@ Controller.register = async (user) => {
     throw Error(error);
   }
   try {
-    // const salt = bcrypt.genSaltSync(10);
-    // const hashed = bcrypt.hashSync(user.password, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hashed = bcrypt.hashSync(user.password, salt);
     let createdUser = await User.create({
       name: user.name,
       email: user.email,
-      password: user.password,
+      password: hased,
       phone: user.phone,
     });
     return createdUser;

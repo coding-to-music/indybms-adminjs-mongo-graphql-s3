@@ -1,4 +1,3 @@
-const { boolean } = require('joi');
 const mongoose = require('mongoose');
 
 const EventSchema = mongoose.Schema({
@@ -14,19 +13,20 @@ const EventSchema = mongoose.Schema({
   },
   // Event Category
   category: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
     required: true
   },
   // User information who registered for the event
   registrations: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'Registration'
     }
   ],
   // Maximum number of allowed registrations
   maxAllowedRegistrations: {
-    type: [Number],
+    type: Number,
     required: true
   },
   // Event Poster
@@ -37,54 +37,34 @@ const EventSchema = mongoose.Schema({
   // Event gallery
   gallery: [
     {
-        type: String,
+      type: String,
     }
   ],
   // Latitude, Longitude
   location: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      required: true
-    },
-    coordinates: {
-      type: [Number],
-      required: true
-    }
+    type: [Number],
+    required: true,
   },
   // Event Start Date and Time
-  startDateTime: {
+  date: {
     type: Date,
-    default: Date.now 
-  },
-  // Checks if a Event is multi-day or not
-  isStartEndSame:{
-    type: Boolean
-  },
-  // Event End Date and Time
-  endDateTime: {
-    type: Date,
-    default: Date.now 
+    default: Date.now,
+    required: true,
   },
   // Age Restriction
   ageRestriction: {
-    type: Number,
+    type: Boolean,
     required: true
-  },
-  // ID Requirement
-  idRequired: {
-    type: Boolean
   },
   // Event Status
   status: {
     type: String,
-    enum: ['PENDING', 'REQUESTED CHANGES', 'REJECTED', 'APPROVED', 'COMPLETED', 'UPCOMING', 'INPROGRESS'],
+    enum: ['PENDING', 'REJECTED', 'APPROVED', 'COMPLETED', 'UPCOMING', 'IN_PROGRESS'],
     default: 'PENDING'
   },
   // Event Registration Fee
   registrationFee: {
     type: Number,
-    required: true
   },
   // Owner details
   owner: {
