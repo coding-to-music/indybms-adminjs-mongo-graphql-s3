@@ -1,6 +1,6 @@
 const { verifyJWT } = require('../utils/jwt')
 
-module.exports = (req, res, next) => {
+const authMiddleware = (req, res, next) => {
   let tokenToVerify;
 
   if (req.header('Authorization')) {
@@ -18,9 +18,6 @@ module.exports = (req, res, next) => {
     } else {
       return res.status(401).json({ msg: 'Format for Authorization: Bearer [token]' });
     }
-  } else if (req.body.token) {
-    tokenToVerify = req.body.token;
-    delete req.query.token;
   } else {
     return res.status(401).json({ msg: 'No Authorization was found' });
   }
@@ -31,3 +28,5 @@ module.exports = (req, res, next) => {
     return next();
   });
 };
+
+module.exports = authMiddleware;

@@ -1,5 +1,4 @@
 const {
-  GraphQLInt,
   GraphQLString,
   GraphQLObjectType,
 } = require('graphql');
@@ -23,6 +22,10 @@ const UserType = new GraphQLObjectType({
     phone: {
       type: GraphQLString,
       resolve: (user) => user.phone,
+    },
+    privilege: {
+      type: GraphQLString,
+      resolve: (user) => user.privilege,
     },
     createdAt: {
       type: GraphQLString,

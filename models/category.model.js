@@ -13,6 +13,6 @@ const CategorySchema = mongoose.Schema({
       ref: 'Event'
     }
   ],
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Category', CategorySchema);

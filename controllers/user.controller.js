@@ -1,36 +1,96 @@
 const { User } = require("../models/index");
 const { UserValidation } = require("../middleware/index");
-const bcrypt = require('bcryptjs')
+const { issueJWT } = require("../utils/jwt");
+const bcrypt = require("bcryptjs");
 
 let Controller = {};
 
-Controller.register = async (user) => {
+Controller.register = async (req, res) => {
+  let user = req.body.user;
   const { error } = UserValidation.register(user);
+  if (error) {
+    return res.status(401).json("Invalid Input: " + error);
+  }
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(user.password, salt);
+    let createdUser = await User.create({
+      name: user.name,
+      email: user.email,
+      password: hashed,
+      phone: user.phone,
+    });
+    const token = issueJWT({ id: createdUser._id, privilege: createdUser.privilege });
+    return res
+      .header("Authorization", token)
+      .status(200)
+      .json({ id: createdUser._id, token: token });
+  } catch (err) {
+    return res.status(500).json("Could not register: " + err);
+  }
+};
+
+Controller.login = async (req, res) => {
+  let user = req.body.user;
+  const { error } = UserValidation.login(user);
+  if (error) {
+    return res.status(401).json("Invalid Input: " + error);
+  }
+  try {
+    const foundUser = await User.findOne({ email: user.email });
+    const validPass = await bcrypt.compare(user.password, foundUser.password);
+    if (!validPass) {
+      return res.status(401).json("Username or Password is incorrect.");
+    }
+    const token = issueJWT({ id: foundUser._id, privilege: foundUser.privilege });
+    return res
+      .header("Authorization", token)
+      .status(200)
+      .json({ id: foundUser._id, token: token });
+  } catch (err) {
+    return res.status(500).json("Could not login: " + err);
+  }
+};
+
+Controller.updateUser = async (user, req) => {
+  const { error } = UserValidation.updateUser(user);
   if (error) {
     throw Error(error);
   }
   try {
-    const salt = bcrypt.genSaltSync(10);
-    const hashed = bcrypt.hashSync(user.password, salt);
-    let createdUser = await User.create({
+    let id = req.token._id;
+    let updatedUser = await User.findByIdAndUpdate(id, {
       name: user.name,
       email: user.email,
-      password: hased,
       phone: user.phone,
-    });
-    return createdUser;
+      privilege: user.privilege,
+    }, { returnDocument: 'after' });
+    return updatedUser;
   } catch (err) {
     throw Error(err);
   }
-}
+};
 
-Controller.findUserById = async (id) => {
+Controller.findUserById = async (id, req) => {
   try {
-    let foundUser = await User.findById(id);
+    let foundUser = await User.findById(id)
+      .populate("createdEvents")
+      .populate("registeredEvents");
     return foundUser;
   } catch (err) {
     throw Error(err);
   }
-}
+};
+
+Controller.findUserByEmail = async (email, req) => {
+  try {
+    let foundUser = await User.findOne({ email: email })
+      .populate("createdEvents")
+      .populate("registeredEvents");
+    return foundUser;
+  } catch (err) {
+    throw Error(err);
+  }
+};
 
 module.exports = Controller;

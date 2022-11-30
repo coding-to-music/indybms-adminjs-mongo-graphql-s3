@@ -19,6 +19,6 @@ const RegistrationSchema = mongoose.Schema({
       ref: 'User'
     }
   ,
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Registration', RegistrationSchema);

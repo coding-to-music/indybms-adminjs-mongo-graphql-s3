@@ -4,12 +4,13 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const compression = require('compression');
-const helmet = require('helmet');
 const session = require('express-session')
 const { graphqlHTTP } = require('express-graphql');
 const { schema } = require('./graphql');
 const { admin } = require('./controllers/admin.controller');
 const adminRoutes = require('./routes/admin.routes');
+const authenticationRoutes = require('./routes/authentication.routes');
+const authMiddleware = require('./middleware/authentication');
 
 const app = express();
 dotenv.config();
@@ -38,7 +39,6 @@ app.use(compression());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
-// app.use(helmet());
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
@@ -47,7 +47,9 @@ app.use(
     cookie: { secure: false }
   })
 );
-app.use('/graphql', graphqlHTTP({
+app.use('/api', authenticationRoutes);
+
+app.use('/graphql', authMiddleware, graphqlHTTP({
   schema: schema,
   graphiql: true,
 }));

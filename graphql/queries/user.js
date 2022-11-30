@@ -17,8 +17,12 @@ const getUserQuery = {
       type: GraphQLString,
     },
   },
-  resolve: (_, { id, email }) => {
-    return UserController.findUserById(id);
+  resolve: (_, { id, email }, req) => {
+    if (id) {
+      return UserController.findUserById(id, req);
+    } else {
+      return UserController.findUserByEmail(email, req)
+    }
   },
 };
 
