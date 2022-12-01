@@ -6,12 +6,15 @@ import {
   event,
   getAllEvents,
   searchEvents,
+  getAllEventRegistrationsQuery,
+  getRegistrationQuery,
 } from "./queries/index.js";
 import { 
   updateUser, 
   createCategory, 
   createEvent, 
   updateEvent, 
+  createRegistration,
 } from "./mutations/index.js";
 
 const RootQuery = new GraphQLObjectType({
@@ -25,6 +28,8 @@ const RootQuery = new GraphQLObjectType({
     event: event,
     allEvents: getAllEvents,
     searchEvents: searchEvents,
+    eventRegistrations: getAllEventRegistrationsQuery,
+    registration: getRegistrationQuery,
   }),
 });
 
@@ -37,6 +42,7 @@ const RootMutation = new GraphQLObjectType({
     createCategory: createCategory,
     createEvent: createEvent,
     updateEvent: updateEvent,
+    registerForEvent: createRegistration,
   }),
 });
 

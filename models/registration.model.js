@@ -15,11 +15,11 @@ const RegistrationSchema = Schema(
       type: String,
       required: true,
     },
-    userId: {
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    eventId: {
+    event: {
       type: Schema.Types.ObjectId,
       ref: "Event",
     },
