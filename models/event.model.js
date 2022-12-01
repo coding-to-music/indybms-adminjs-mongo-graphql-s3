@@ -46,7 +46,6 @@ const EventSchema = mongoose.Schema({
   // Event Start Date and Time
   date: {
     type: Date,
-    default: Date.now,
     required: true,
   },
   // Age Restriction

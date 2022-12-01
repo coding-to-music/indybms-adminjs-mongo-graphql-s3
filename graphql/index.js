@@ -1,29 +1,38 @@
-const {
-  GraphQLSchema,
-  GraphQLObjectType,
-} = require('graphql');
+const { GraphQLSchema, GraphQLObjectType } = require("graphql");
 
-const { getUserQuery, getAllCategoriesQuery, getCategoryQuery, } = require('./queries');
 const {
-  updateUser, createCategory
-} = require('./mutations');
+  getUserQuery,
+  getAllCategoriesQuery,
+  getCategoryQuery,
+  event,
+  getAllEvents,
+  searchEvents,
+} = require("./queries");
+const { updateUser, createCategory, createEvent, updateEvent } = require("./mutations");
 
 const RootQuery = new GraphQLObjectType({
-  name: 'rootQuery',
-  description: 'This is the root query which holds all possible READ entrypoints for the GraphQL API',
+  name: "rootQuery",
+  description:
+    "This is the root query which holds all possible READ entrypoints for the GraphQL API",
   fields: () => ({
     user: getUserQuery,
     allCategories: getAllCategoriesQuery,
     category: getCategoryQuery,
+    event,
+    allEvents: getAllEvents,
+    searchEvents,
   }),
 });
 
 const RootMutation = new GraphQLObjectType({
-  name: 'rootMutation',
-  description: 'This is the root mutation which holds all possible WRITE entrypoints for the GraphQL API',
+  name: "rootMutation",
+  description:
+    "This is the root mutation which holds all possible WRITE entrypoints for the GraphQL API",
   fields: () => ({
     updateUser,
     createCategory,
+    createEvent, 
+    updateEvent,
   }),
 });
 

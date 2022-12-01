@@ -1,34 +1,36 @@
 const { EventType } = require('../types');
-const { UserInputType } = require('../inputs');
-const { UserController } = require('../../controllers');
+const { EventInputType } = require('../inputs');
+const { EventController } = require('../../controllers');
 
-const createUser = {
-  type: UserType,
-  description: 'The mutation that allows you to create a new user',
+const createEvent = {
+  type: EventType,
+  description: 'The mutation that allows you to create a new event',
   args: {
-    user: {
-      name: 'user',
-      type: UserInputType('create'),
+    event: {
+      name: 'event',
+      type: EventInputType('create'),
     },
   },
-  resolve: async (_, { user }) => {
-    return UserController.register(user);
+  resolve: async (_, { event }) => {
+    return EventController.createEvent(event);
   },
 };
 
-const updateUser = {
-  type: UserType,
-  description: 'The mutation that allows you to update an existing User by Id',
+const updateEvent = {
+  type: EventType,
+  description: 'The mutation that allows you to update an existing event by Id',
   args: {
-    user: {
-      name: 'user',
-      type: UserInputType('update'),
+    event: {
+      name: 'event',
+      type: EventInputType('update'),
     },
   },
-  resolve: async (_, { user }) => {},
+  resolve: async (_, { event }) => {
+    return EventController.updateEvent(event);
+  },
 };
 
 module.exports = {
-  createUser,
-  updateUser,
+  createEvent,
+  updateEvent,
 }
