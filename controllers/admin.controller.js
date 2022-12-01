@@ -1,7 +1,7 @@
 import AdminJS from "adminjs";
 import AdminJSMongoose from "@adminjs/mongoose";
 import mongoose from "mongoose";
-import { User } from "../models/index.js";
+import { User, Category, Event, Registration } from "../models/index.js";
 
 AdminJS.registerAdapter(AdminJSMongoose);
 
@@ -12,8 +12,46 @@ const admin = () =>
     branding: {
       companyName: "IndyBMS",
       softwareBrothers: false,
+      logo: false,
     },
-    resources: [User],
+    resources: [
+      {
+        resource: User,
+        options: {
+          listProperties: ["_id", "name", "email", "phone", "privilege", "registeredEvents", "createdEvents", "createdAt", "updatedAt"],
+          filterProperties: ["_id", "name", "email", "phone", "privilege", "registeredEvents", "createdEvents", "createdAt", "updatedAt"],
+          editProperties: ["name", "email", "phone", "privilege", "registeredEvents", "createdEvents"],
+          showProperties: ["_id", "name", "email", "phone", "privilege", "registeredEvents", "createdEvents", "createdAt", "updatedAt"],
+        },
+      },
+      {
+        resource: Category,
+        options: {
+          listProperties: ["_id", "name", "events", "createdAt", "updatedAt"],
+          filterProperties: ["_id", "name", "events", "createdAt", "updatedAt"],
+          editProperties: ["name", "events"],
+          showProperties: ["_id", "name", "events", "createdAt", "updatedAt"],
+        },
+      },
+      {
+        resource: Event,
+        options: {
+          listProperties: ["_id", "title", "description", "category", "registrations", "maxAllowedRegistrations", "coverImage", "gallery", "location", "date", "ageRestriction", "status", "registrationFee", "owner", "createdAt", "updatedAt"],
+          filterProperties: ["_id", "title", "description", "category", "registrations", "maxAllowedRegistrations", "coverImage", "gallery", "location", "date", "ageRestriction", "status", "registrationFee", "owner", "createdAt", "updatedAt"],
+          editProperties: ["title", "description", "category", "registrations", "maxAllowedRegistrations", "coverImage", "gallery", "location", "date", "ageRestriction", "status", "registrationFee", "owner"],
+          showProperties: ["_id", "title", "description", "category", "registrations", "maxAllowedRegistrations", "coverImage", "gallery", "location", "date", "ageRestriction", "status", "registrationFee", "owner", "createdAt", "updatedAt"],
+        },
+      },
+      {
+        resource: Registration,
+        options: {
+          listProperties: ["_id", "name", "email", "phone", "user", "event", "createdAt", "updatedAt"],
+          filterProperties: ["_id", "name", "email", "phone", "user", "event", "createdAt", "updatedAt"],
+          editProperties: ["name", "email", "phone", "user", "event"],
+          showProperties: ["_id", "name", "email", "phone", "user", "event", "createdAt", "updatedAt"],
+        },
+      },
+    ],
   });
 
 const DEFAULT_ADMIN = {
