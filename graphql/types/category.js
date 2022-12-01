@@ -1,5 +1,4 @@
 import { GraphQLString, GraphQLObjectType } from "graphql";
-// import { EventType } from "./event.js";
 
 const CategoryType = new GraphQLObjectType({
   name: "Category",
@@ -9,10 +8,6 @@ const CategoryType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (category) => category.name,
     },
-    // events: {
-    //   type: [EventType],
-    //   resolve: (category) => category.events,
-    // },
   }),
 });
 

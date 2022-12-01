@@ -1,4 +1,4 @@
-import { GraphQLString, GraphQLObjectType } from "graphql";
+import { GraphQLString, GraphQLObjectType, GraphQLList } from "graphql";
 import { EventType } from "./event.js";
 
 const UserType = new GraphQLObjectType({
@@ -25,14 +25,14 @@ const UserType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (user) => user.privilege,
     },
-    // createdEvents: {
-    //   type: [EventType],
-    //   resolve: (user) => user.createdEvents,
-    // },
-    // registeredEvents: {
-    //   type: [EventType],
-    //   resolve: (user) => user.createdEvents,
-    // },
+    createdEvents: {
+      type: new GraphQLList(EventType),
+      resolve: (user) => user.createdEvents,
+    },
+    registeredEvents: {
+      type: new GraphQLList(EventType),
+      resolve: (user) => user.registeredEvents,
+    },
     createdAt: {
       type: GraphQLString,
       resolve: (user) => user.createdAt,
