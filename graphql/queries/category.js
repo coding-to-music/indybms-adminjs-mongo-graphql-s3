@@ -1,10 +1,10 @@
-import { GraphQLString } from "graphql";
+import { GraphQLList, GraphQLString } from "graphql";
 
 import { CategoryType } from "../types/index.js";
 import { CategoryController } from "../../controllers/index.js";
 
 const getAllCategoriesQuery = {
-  type: CategoryType,
+  type: new GraphQLList(CategoryType),
   resolve: (_, __, req) => {
     return CategoryController.getAllCategories(req);
   },

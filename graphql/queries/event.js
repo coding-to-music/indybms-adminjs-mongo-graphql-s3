@@ -1,9 +1,9 @@
-import { GraphQLString } from "graphql";
+import { GraphQLList, GraphQLString } from "graphql";
 import { EventType } from "../types/index.js";
 import { EventController } from "../../controllers/index.js";
 
 const getAllEvents = {
-  type: [EventType],
+  type: new GraphQLList(EventType),
   resolve: (_, __, req) => {
     return EventController.getAllEvents(req);
   },
@@ -23,7 +23,7 @@ const event = {
 };
 
 const searchEvents = {
-  type: [EventType],
+  type: new GraphQLList(EventType),
   args: {
     searchTerm: {
       name: "searchTerm",

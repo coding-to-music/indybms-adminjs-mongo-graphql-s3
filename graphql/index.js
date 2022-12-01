@@ -22,9 +22,9 @@ const RootQuery = new GraphQLObjectType({
     user: getUserQuery,
     allCategories: getAllCategoriesQuery,
     category: getCategoryQuery,
-    // event: event,
-    // allEvents: getAllEvents,
-    // searchEvents: searchEvents,
+    event: event,
+    allEvents: getAllEvents,
+    searchEvents: searchEvents,
   }),
 });
 

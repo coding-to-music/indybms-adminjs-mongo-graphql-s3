@@ -4,6 +4,7 @@ import {
   GraphQLObjectType,
   GraphQLFloat,
   GraphQLBoolean,
+  GraphQLList,
 } from "graphql";
 import { CategoryType, UserType } from "./index.js";
 
@@ -36,12 +37,12 @@ const EventType = new GraphQLObjectType({
       resolve: (event) => event.coverImage,
     },
     gallery: {
-      type: [GraphQLString],
+      type: new GraphQLList(GraphQLString),
       resolve: (event) => event.gallery,
     },
     // Need to confirm location type
     location: {
-      type: [GraphQLFloat],
+      type: new GraphQLList(GraphQLFloat),
       resolve: (event) => event.location,
     },
     // Need to confirm date type
