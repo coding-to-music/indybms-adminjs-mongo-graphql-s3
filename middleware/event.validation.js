@@ -1,4 +1,4 @@
-const Joi = require("joi");
+import Joi from "joi";
 
 const eventValidation = {}
 
@@ -37,4 +37,4 @@ eventValidation.updateEvent = data => {
   return schema.validate(data);
 };
 
-module.exports = eventValidation;
+export default eventValidation;

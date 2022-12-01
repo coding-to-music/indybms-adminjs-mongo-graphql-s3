@@ -1,14 +1,14 @@
-const { UserType } = require('../types');
-const { UserInputType } = require('../inputs');
-const { UserController } = require('../../controllers');
+import { UserType } from "../types/index.js";
+import { UserInputType } from "../inputs/index.js";
+import { UserController } from "../../controllers/index.js";
 
 const updateUser = {
   type: UserType,
-  description: 'The mutation that allows you to update an existing User by Id',
+  description: "The mutation that allows you to update an existing User by Id",
   args: {
     user: {
-      name: 'user',
-      type: UserInputType('update'),
+      name: "user",
+      type: UserInputType("update"),
     },
   },
   resolve: async (_, { user }, req) => {
@@ -16,6 +16,6 @@ const updateUser = {
   },
 };
 
-module.exports = {
+export {
   updateUser,
-}
+};

@@ -1,19 +1,16 @@
-const {
-  GraphQLString,
-} = require('graphql');
-
-const { UserType } = require('../types');
-const { UserController } = require('../../controllers/index');
+import { GraphQLString } from "graphql";
+import { UserType } from "../types/index.js";
+import { UserController } from "../../controllers/index.js";
 
 const getUserQuery = {
   type: UserType,
   args: {
     id: {
-      name: 'id',
+      name: "id",
       type: GraphQLString,
     },
     email: {
-      name: 'email',
+      name: "email",
       type: GraphQLString,
     },
   },
@@ -21,9 +18,9 @@ const getUserQuery = {
     if (id) {
       return UserController.findUserById(id, req);
     } else {
-      return UserController.findUserByEmail(email, req)
+      return UserController.findUserByEmail(email, req);
     }
   },
 };
 
-module.exports = { getUserQuery };
+export { getUserQuery };

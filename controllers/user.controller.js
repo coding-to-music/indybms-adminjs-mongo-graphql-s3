@@ -1,7 +1,7 @@
-const { User } = require("../models/index");
-const { UserValidation } = require("../middleware/index");
-const { issueJWT } = require("../utils/jwt");
-const bcrypt = require("bcryptjs");
+import { User } from "../models/index.js";
+import { UserValidation } from "../middleware/index.js";
+import { issueJWT } from "../utils/jwt.js";
+import bcrypt from "bcryptjs";
 
 let Controller = {};
 
@@ -20,7 +20,10 @@ Controller.register = async (req, res) => {
       password: hashed,
       phone: user.phone,
     });
-    const token = issueJWT({ id: createdUser._id, privilege: createdUser.privilege });
+    const token = issueJWT({
+      id: createdUser._id,
+      privilege: createdUser.privilege,
+    });
     return res
       .header("Authorization", token)
       .status(200)
@@ -59,12 +62,16 @@ Controller.updateUser = async (user, req) => {
   }
   try {
     let id = req.token._id;
-    let updatedUser = await User.findByIdAndUpdate(id, {
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      privilege: user.privilege,
-    }, { returnDocument: 'after' });
+    let updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        privilege: user.privilege,
+      },
+      { returnDocument: "after" }
+    );
     return updatedUser;
   } catch (err) {
     throw Error(err);
@@ -93,4 +100,4 @@ Controller.findUserByEmail = async (email, req) => {
   }
 };
 
-module.exports = Controller;
+export default Controller;

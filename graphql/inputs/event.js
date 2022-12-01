@@ -1,10 +1,10 @@
-const {
+import {
   GraphQLInputObjectType,
   GraphQLInt,
   GraphQLString,
   GraphQLFloat,
   GraphQLBoolean,
-} = require("graphql");
+} from "graphql";
 
 const EventInputType = (type) => {
   let allGraphFields = {};
@@ -73,4 +73,4 @@ const EventInputType = (type) => {
   return eventInputType;
 };
 
-module.exports = { EventInputType };
+export default EventInputType;

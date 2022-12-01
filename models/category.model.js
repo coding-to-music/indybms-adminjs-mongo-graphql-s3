@@ -1,18 +1,21 @@
-const mongoose = require('mongoose');
+import { Schema, model } from "mongoose";
 
-const CategorySchema = mongoose.Schema({
-  // Name of the Category
-  name: {
-    type: String,
-    required: true
+const CategorySchema = Schema(
+  {
+    // Name of the Category
+    name: {
+      type: String,
+      required: true,
+    },
+    // Events within a Category
+    events: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
   },
-  // Events within a Category
-  events: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event'
-    }
-  ],
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Category', CategorySchema);
+export default model("Category", CategorySchema);

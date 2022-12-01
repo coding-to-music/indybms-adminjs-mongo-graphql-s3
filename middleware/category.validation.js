@@ -1,4 +1,4 @@
-const Joi = require("joi");
+import Joi from "joi";
 
 const categoryValidation = {}
 
@@ -11,4 +11,4 @@ categoryValidation.create = data => {
   return schema.validate(data);
 };
 
-module.exports = categoryValidation;
+export default categoryValidation;

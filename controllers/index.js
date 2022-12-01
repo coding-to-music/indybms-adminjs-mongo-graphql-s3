@@ -1,8 +1,8 @@
-const UserController = require('./user.controller');
-const CategoryController = require('./category.controller');
-const EventController = require('./event.controller');
+import UserController from "./user.controller.js";
+import CategoryController from "./category.controller.js";
+import EventController from "./event.controller.js";
 
-module.exports = {
+export {
   UserController,
   CategoryController,
   EventController,

@@ -1,7 +1,6 @@
-const { GraphQLString } = require("graphql");
-
-const { EventType } = require("../types");
-const { EventController } = require("../../controllers");
+import { GraphQLString } from "graphql";
+import { EventType } from "../types/index.js";
+import { EventController } from "../../controllers/index.js";
 
 const getAllEvents = {
   type: [EventType],
@@ -36,4 +35,4 @@ const searchEvents = {
   },
 };
 
-module.exports = { getAllEvents, event, searchEvents };
+export { getAllEvents, event, searchEvents };

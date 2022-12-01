@@ -1,40 +1,43 @@
-const mongoose = require('mongoose');
+import { Schema, model } from "mongoose";
 
-const UserSchema = mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
+const UserSchema = Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    privilege: {
+      type: String,
+      enum: ["USER", "ORGANIZER", "ADMIN"],
+      default: "USER",
+    },
+    createdEvents: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
+    registeredEvents: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
   },
-  password: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  phone: {
-    type: String,
-    required: true
-  },
-  privilege: {
-    type: String,
-    enum: ['USER', 'ORGANIZER', 'ADMIN'],
-    default: 'USER'
-  },
-  createdEvents: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event'
-    }
-  ],
-  registeredEvents: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event'
-    }
-  ],
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('User', UserSchema);
+export default model("User", UserSchema);

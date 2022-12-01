@@ -1,5 +1,5 @@
-const { Event } = require("../models/index");
-const { EventValidation } = require("../middleware/index");
+import { Event } from "../models/index.js";
+import { EventValidation } from "../middleware/index.js";
 
 let Controller = {};
 
@@ -8,8 +8,8 @@ Controller.createEvent = async (event, req) => {
   if (error) {
     throw Error(error);
   }
-  if (req.token.privilege === 'USER') {
-    throw Error('Not authorized to create event.');
+  if (req.token.privilege === "USER") {
+    throw Error("Not authorized to create event.");
   }
   try {
     let createdEvent = await Event.create({
@@ -38,18 +38,22 @@ Controller.updateEvent = async (event, req) => {
     throw Error(error);
   }
   try {
-    let updatedEvent = await Event.findByIdAndUpdate(event.id, {
-      title: event.title,
-      description: event.description,
-      maxAllowedRegistrations: event.maxAllowedRegistrations,
-      coverImage: event.coverImage,
-      status: event.status,
-      gallery: event.gallery,
-      location: event.location,
-      date: event.date,
-      ageRestriction: event.ageRestriction,
-      registrationFee: event.registrationFee,
-    }, { returnDocument: 'after' });
+    let updatedEvent = await Event.findByIdAndUpdate(
+      event.id,
+      {
+        title: event.title,
+        description: event.description,
+        maxAllowedRegistrations: event.maxAllowedRegistrations,
+        coverImage: event.coverImage,
+        status: event.status,
+        gallery: event.gallery,
+        location: event.location,
+        date: event.date,
+        ageRestriction: event.ageRestriction,
+        registrationFee: event.registrationFee,
+      },
+      { returnDocument: "after" }
+    );
     if (event.category) {
       updatedEvent.category = event.category;
       await updatedEvent.save();
@@ -62,9 +66,7 @@ Controller.updateEvent = async (event, req) => {
 
 Controller.getAllEvents = async (req) => {
   try {
-    let foundEvents = await Event.find({})
-      .populate("owner")
-      .populate("category");
+    let foundEvents = await Event.find({}).populate("owner").populate("category");
     return foundEvents;
   } catch (err) {
     throw Error(err);
@@ -73,9 +75,7 @@ Controller.getAllEvents = async (req) => {
 
 Controller.findEventById = async (id, req) => {
   try {
-    let foundEvent = await Event.findById(id)
-      .populate("owner")
-      .populate("category");
+    let foundEvent = await Event.findById(id).populate("owner").populate("category");
     return foundEvent;
   } catch (err) {
     throw Error(err);
@@ -84,7 +84,9 @@ Controller.findEventById = async (id, req) => {
 
 Controller.searchEvents = async (searchTerm, req) => {
   try {
-    let foundEvents = await Event.find({ "title": { "$regex": searchTerm, "$options": "i" } })
+    let foundEvents = await Event.find({
+      title: { $regex: searchTerm, $options: "i" },
+    })
       .populate("owner")
       .populate("category");
     return foundEvents;
@@ -93,4 +95,4 @@ Controller.searchEvents = async (searchTerm, req) => {
   }
 };
 
-module.exports = Controller;
+export default Controller;

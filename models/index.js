@@ -1,11 +1,11 @@
-const User = require('./user.model')
-const Event = require('./event.model')
-const Category = require('./category.model')
-const Registration = require('./registration.model')
+import User from "./user.model.js";
+import Event from "./event.model.js";
+import Category from "./category.model.js";
+import Registration from "./registration.model.js";
 
-module.exports = {
+export {
   User,
   Event,
   Category,
   Registration,
-}
+};

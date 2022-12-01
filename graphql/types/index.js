@@ -1,8 +1,8 @@
-const { UserType } = require('./user');
-const { CategoryType } = require('./category');
-const { EventType } = require('./event');
+import { UserType } from "./user.js";
+import { CategoryType } from "./category.js";
+import { EventType } from "./event.js";
 
-module.exports = {
+export {
   UserType,
   CategoryType,
   EventType,

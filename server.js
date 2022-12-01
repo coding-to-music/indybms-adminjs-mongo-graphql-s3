@@ -1,26 +1,26 @@
-const express = require('express');
-const logger = require('morgan');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const compression = require('compression');
-const session = require('express-session')
-const { graphqlHTTP } = require('express-graphql');
-const { schema } = require('./graphql');
-const { admin } = require('./controllers/admin.controller');
-const adminRoutes = require('./routes/admin.routes');
-const authenticationRoutes = require('./routes/authentication.routes');
-const authMiddleware = require('./middleware/authentication');
+import express, { json } from 'express';
+import logger from 'morgan';
+import cors from 'cors';
+import { connect } from 'mongoose';
+import { config } from 'dotenv';
+import compression from 'compression';
+import session from 'express-session';
+import { graphqlHTTP } from 'express-graphql';
+import schema from './graphql/index.js';
+import { admin } from './controllers/admin.controller.js';
+import adminRoutes from './routes/admin.routes.js';
+import authenticationRoutes from './routes/authentication.routes.js';
+import authMiddleware from './middleware/authentication.js';
 
 const app = express();
-dotenv.config();
+config();
 
 // Variables
 const port = process.env.PORT;
 const db = process.env.MONGODB;
 
 // Database
-mongoose.connect(
+connect(
   db,
   { useNewUrlParser: true, useUnifiedTopology: true },
   err => {
@@ -37,7 +37,7 @@ mongoose.connect(
 // Setup
 app.use(compression());
 app.use(logger('dev'));
-app.use(express.json());
+app.use(json());
 app.use(cors());
 app.use(
   session({

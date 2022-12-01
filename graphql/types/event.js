@@ -1,12 +1,11 @@
-const {
+import {
   GraphQLInt,
   GraphQLString,
   GraphQLObjectType,
   GraphQLFloat,
   GraphQLBoolean,
-} = require("graphql");
-const categoryTypeFile = require('./category')
-const userTypeFile = require('./user')
+} from "graphql";
+import { CategoryType, UserType } from "./index.js";
 
 const EventType = new GraphQLObjectType({
   name: "Event",
@@ -25,7 +24,7 @@ const EventType = new GraphQLObjectType({
       resolve: (event) => event.description,
     },
     category: {
-      type: categoryTypeFile.CategoryType,
+      type: CategoryType,
       resolve: (event) => event.category,
     },
     maxAllowedRegistrations: {
@@ -63,7 +62,7 @@ const EventType = new GraphQLObjectType({
       resolve: (event) => event.registrationFee,
     },
     owner: {
-      type: userTypeFile.UserType,
+      type: UserType,
       resolve: (event) => event.owner,
     },
     createdAt: {
@@ -77,4 +76,4 @@ const EventType = new GraphQLObjectType({
   }),
 });
 
-module.exports = { EventType };
+export { EventType };

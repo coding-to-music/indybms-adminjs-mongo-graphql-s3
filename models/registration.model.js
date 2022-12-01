@@ -1,24 +1,30 @@
-const mongoose = require('mongoose');
+import { Schema, model } from "mongoose";
 
-const RegistrationSchema = mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true
+const RegistrationSchema = Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    eventId: {
+      type: Schema.Types.ObjectId,
+      ref: "Event",
+    },
   },
-  name: {
-    type: String,
-    required: true
-  },
-  phone: {
-    type: String,
-    required: true
-  },
-  userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }
-  ,
-}, { timestamps: true });
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Registration', RegistrationSchema);
+export default model("Registration", RegistrationSchema);

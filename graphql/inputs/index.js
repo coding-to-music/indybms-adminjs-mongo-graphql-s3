@@ -1,8 +1,8 @@
-const { UserInputType } = require('./user');
-const { CategoryInputType } = require('./category');
-const { EventInputType } = require('./event');
+import UserInputType from "./user.js";
+import CategoryInputType from "./category.js";
+import EventInputType from "./event.js";
 
-module.exports = {
+export {
   UserInputType,
   CategoryInputType,
   EventInputType,

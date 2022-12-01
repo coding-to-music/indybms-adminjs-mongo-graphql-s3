@@ -1,10 +1,10 @@
-const { updateUser } = require('./user');
-const { createCategory } = require('./category');
-const { createEvent, updateEvent } = require('./event');
+import { updateUser } from "./user.js";
+import { createCategory } from "./category.js";
+import { createEvent, updateEvent } from "./event.js";
 
-module.exports = {
-  createCategory,
+export {
   updateUser,
+  createCategory,
   createEvent,
   updateEvent,
 };

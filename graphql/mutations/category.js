@@ -1,13 +1,13 @@
-const { CategoryType } = require('../types');
-const { CategoryInputType } = require('../inputs');
-const { CategoryController } = require('../../controllers');
+import { CategoryType } from "../types/index.js";
+import { CategoryInputType } from "../inputs/index.js";
+import { CategoryController } from "../../controllers/index.js";
 
 const createCategory = {
   type: CategoryType,
-  description: 'The mutation that allows you to create a new category',
+  description: "The mutation that allows you to create a new category",
   args: {
     category: {
-      name: 'category',
+      name: "category",
       type: CategoryInputType,
     },
   },
@@ -16,6 +16,6 @@ const createCategory = {
   },
 };
 
-module.exports = {
+export {
   createCategory,
-}
+};

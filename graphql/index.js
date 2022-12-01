@@ -1,14 +1,18 @@
-const { GraphQLSchema, GraphQLObjectType } = require("graphql");
-
-const {
+import { GraphQLSchema, GraphQLObjectType } from "graphql";
+import {
   getUserQuery,
   getAllCategoriesQuery,
   getCategoryQuery,
   event,
   getAllEvents,
   searchEvents,
-} = require("./queries");
-const { updateUser, createCategory, createEvent, updateEvent } = require("./mutations");
+} from "./queries/index.js";
+import { 
+  updateUser, 
+  createCategory, 
+  createEvent, 
+  updateEvent, 
+} from "./mutations/index.js";
 
 const RootQuery = new GraphQLObjectType({
   name: "rootQuery",
@@ -18,9 +22,9 @@ const RootQuery = new GraphQLObjectType({
     user: getUserQuery,
     allCategories: getAllCategoriesQuery,
     category: getCategoryQuery,
-    event,
-    allEvents: getAllEvents,
-    searchEvents,
+    // event: event,
+    // allEvents: getAllEvents,
+    // searchEvents: searchEvents,
   }),
 });
 
@@ -29,10 +33,10 @@ const RootMutation = new GraphQLObjectType({
   description:
     "This is the root mutation which holds all possible WRITE entrypoints for the GraphQL API",
   fields: () => ({
-    updateUser,
-    createCategory,
-    createEvent, 
-    updateEvent,
+    updateUser: updateUser,
+    createCategory: createCategory,
+    // createEvent: createEvent,
+    // updateEvent: updateEvent,
   }),
 });
 
@@ -41,4 +45,4 @@ const schema = new GraphQLSchema({
   mutation: RootMutation,
 });
 
-module.exports = { schema };
+export default schema;

@@ -1,5 +1,5 @@
-const { GraphQLString, GraphQLObjectType } = require("graphql");
-// const eventTypeFile = require('./event')
+import { GraphQLString, GraphQLObjectType } from "graphql";
+import { EventType } from "./event.js";
 
 const UserType = new GraphQLObjectType({
   name: "User",
@@ -26,11 +26,11 @@ const UserType = new GraphQLObjectType({
       resolve: (user) => user.privilege,
     },
     // createdEvents: {
-    //   type: [eventTypeFile.EventType],
+    //   type: [EventType],
     //   resolve: (user) => user.createdEvents,
     // },
     // registeredEvents: {
-    //   type: [eventTypeFile.EventType],
+    //   type: [EventType],
     //   resolve: (user) => user.createdEvents,
     // },
     createdAt: {
@@ -44,4 +44,4 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
-module.exports = { UserType };
+export { UserType };

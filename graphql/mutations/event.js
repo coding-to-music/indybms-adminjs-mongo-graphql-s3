@@ -1,14 +1,14 @@
-const { EventType } = require('../types');
-const { EventInputType } = require('../inputs');
-const { EventController } = require('../../controllers');
+import { EventType } from "../types/index.js";
+import { EventInputType } from "../inputs/index.js";
+import { EventController } from "../../controllers/index.js";
 
 const createEvent = {
   type: EventType,
-  description: 'The mutation that allows you to create a new event',
+  description: "The mutation that allows you to create a new event",
   args: {
     event: {
-      name: 'event',
-      type: EventInputType('create'),
+      name: "event",
+      type: EventInputType("create"),
     },
   },
   resolve: async (_, { event }) => {
@@ -18,11 +18,11 @@ const createEvent = {
 
 const updateEvent = {
   type: EventType,
-  description: 'The mutation that allows you to update an existing event by Id',
+  description: "The mutation that allows you to update an existing event by Id",
   args: {
     event: {
-      name: 'event',
-      type: EventInputType('update'),
+      name: "event",
+      type: EventInputType("update"),
     },
   },
   resolve: async (_, { event }) => {
@@ -30,7 +30,7 @@ const updateEvent = {
   },
 };
 
-module.exports = {
+export {
   createEvent,
   updateEvent,
-}
+};

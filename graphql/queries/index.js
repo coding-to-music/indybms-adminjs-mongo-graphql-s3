@@ -1,8 +1,8 @@
-const { getUserQuery } = require("./user");
-const { getAllCategoriesQuery, getCategoryQuery } = require("./category");
-const { getAllEvents, event, searchEvents } = require("./event");
+import { getUserQuery } from "./user.js";
+import { getAllCategoriesQuery, getCategoryQuery } from "./category.js";
+import { getAllEvents, event, searchEvents } from "./event.js";
 
-module.exports = {
+export {
   getUserQuery,
   getAllCategoriesQuery,
   getCategoryQuery,

@@ -1,22 +1,19 @@
-const {
-  GraphQLString,
-  GraphQLObjectType,
-} = require('graphql');
-// const eventTypeFile = require('./event')
+import { GraphQLString, GraphQLObjectType } from "graphql";
+// import { EventType } from "./event.js";
 
 const CategoryType = new GraphQLObjectType({
-  name: 'Category',
-  description: 'This represents a Category',
+  name: "Category",
+  description: "This represents a Category",
   fields: () => ({
     name: {
       type: GraphQLString,
       resolve: (category) => category.name,
     },
     // events: {
-    //   type: [eventTypeFile.EventType],
+    //   type: [EventType],
     //   resolve: (category) => category.events,
     // },
   }),
 });
 
-module.exports = { CategoryType };
+export { CategoryType };

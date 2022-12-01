@@ -1,16 +1,13 @@
-const {
-  GraphQLInputObjectType,
-  GraphQLString,
-} = require('graphql');
+import { GraphQLInputObjectType, GraphQLString } from "graphql";
 
 const CategoryInputType = new GraphQLInputObjectType({
-  name: 'CategoryInput',
-  description: 'This represents a CategoryInputType',
-  fields: () => ({
+  name: "CategoryInputType",
+  description: "This represents a CategoryInputType",
+  fields: {
     name: {
       type: GraphQLString,
-    }
-  }),
+    },
+  },
 });
 
-module.exports = { CategoryInputType };
+export default CategoryInputType;

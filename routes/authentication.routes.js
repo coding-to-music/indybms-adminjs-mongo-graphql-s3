@@ -1,5 +1,6 @@
-const Router = require("express").Router();
-const { UserController } = require('../controllers/index')
+import express from "express";
+const Router = express.Router();
+import { UserController } from "../controllers/index.js";
 
 Router.post("/login", async (req, res) => {
   await UserController.login(req, res);
@@ -9,4 +10,4 @@ Router.post("/register", async (req, res) => {
   await UserController.register(req, res);
 });
 
-module.exports = Router;
+export default Router;

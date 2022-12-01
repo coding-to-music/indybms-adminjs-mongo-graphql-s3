@@ -1,4 +1,4 @@
-const Joi = require("joi");
+import Joi from "joi";
 
 const userValidations = {}
 
@@ -40,4 +40,4 @@ userValidations.updateUser = data => {
   return schema.validate(data);
 };
 
-module.exports = userValidations;
+export default userValidations;

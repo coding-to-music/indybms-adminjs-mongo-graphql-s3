@@ -1,14 +1,12 @@
-const {
-  GraphQLString,
-} = require('graphql');
+import { GraphQLString } from "graphql";
 
-const { CategoryType } = require('../types');
-const { CategoryController } = require('../../controllers/index');
+import { CategoryType } from "../types/index.js";
+import { CategoryController } from "../../controllers/index.js";
 
 const getAllCategoriesQuery = {
   type: CategoryType,
   resolve: (_, __, req) => {
-      return CategoryController.getAllCategories(req);
+    return CategoryController.getAllCategories(req);
   },
 };
 
@@ -16,11 +14,11 @@ const getCategoryQuery = {
   type: CategoryType,
   args: {
     id: {
-      name: 'id',
+      name: "id",
       type: GraphQLString,
     },
     name: {
-      name: 'name',
+      name: "name",
       type: GraphQLString,
     },
   },
@@ -28,9 +26,9 @@ const getCategoryQuery = {
     if (id) {
       return CategoryController.findCategoryById(id, req);
     } else {
-      return CategoryController.findCategoryByName(name, req)
+      return CategoryController.findCategoryByName(name, req);
     }
   },
 };
 
-module.exports = { getAllCategoriesQuery, getCategoryQuery };
+export { getAllCategoriesQuery, getCategoryQuery };

@@ -1,5 +1,5 @@
-const { Category } = require("../models/index");
-const { CategoryValidation } = require("../middleware/index");
+import { Category } from "../models/index.js";
+import { CategoryValidation } from "../middleware/index.js";
 
 let Controller = {};
 
@@ -14,8 +14,7 @@ Controller.getAllCategories = async (req) => {
 
 Controller.findCategoryById = async (id, req) => {
   try {
-    let foundCategory = await Category.findById(id)
-      .populate("events")
+    let foundCategory = await Category.findById(id).populate("events");
     return foundCategory;
   } catch (err) {
     throw Error(err);
@@ -39,11 +38,13 @@ Controller.createCategory = async (category, req) => {
 
 Controller.findCategoryByName = async (name, req) => {
   try {
-    let foundCategories = await Category.find({ "name": { "$regex": name, "$options": "i" } });
+    let foundCategories = await Category.find({
+      name: { $regex: name, $options: "i" },
+    });
     return foundCategories;
   } catch (err) {
     throw Error(err);
   }
 };
 
-module.exports = Controller;
+export default Controller;
