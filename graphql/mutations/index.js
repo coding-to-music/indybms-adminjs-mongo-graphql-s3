@@ -1,6 +1,7 @@
-const { createUser, updateUser } = require('./user');
+const { updateUser } = require('./user');
+const { createCategory } = require('./category');
 
 module.exports = {
-  createUser,
+  createCategory,
   updateUser,
 };

@@ -1,19 +1,16 @@
 const Joi = require("joi");
 
-const eventValidations = {}
+const eventValidation = {}
 
-// Validation for Event Creation flow
-eventValidations.creation = data => {
+// Validation for Event Creation
+eventValidation.createEvent = data => {
   const schema = Joi.object({
     
   });
   return schema.validate(data);
 };
 
-// Validation for Event register flow
+// Validation for Event Update
 
-// Validation for Event update flow (Organizer)
 
-// Validation for Event update flow (Admin - Status change)
-
-module.exports = eventValidations;
+module.exports = eventValidation;

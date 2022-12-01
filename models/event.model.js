@@ -35,11 +35,9 @@ const EventSchema = mongoose.Schema({
     required: true
   },
   // Event gallery
-  gallery: [
-    {
-      type: String,
-    }
-  ],
+  gallery: {
+    type: [String],
+  },
   // Latitude, Longitude
   location: {
     type: [Number],

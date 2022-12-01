@@ -1,11 +1,9 @@
-const {
-  GraphQLString,
-  GraphQLObjectType,
-} = require('graphql');
+const { GraphQLString, GraphQLObjectType } = require("graphql");
+// const eventTypeFile = require('./event')
 
 const UserType = new GraphQLObjectType({
-  name: 'User',
-  description: 'This represents a User',
+  name: "User",
+  description: "This represents a User",
   fields: () => ({
     id: {
       type: GraphQLString,
@@ -27,6 +25,14 @@ const UserType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (user) => user.privilege,
     },
+    // createdEvents: {
+    //   type: [eventTypeFile.EventType],
+    //   resolve: (user) => user.createdEvents,
+    // },
+    // registeredEvents: {
+    //   type: [eventTypeFile.EventType],
+    //   resolve: (user) => user.createdEvents,
+    // },
     createdAt: {
       type: GraphQLString,
       resolve: (user) => user.createdAt,
