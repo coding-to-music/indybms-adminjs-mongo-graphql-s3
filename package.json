@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "hooks-install": "husky install",
-    "start": "pm2 start ecosystem.config.cjs --env production",
+    "start": "pm2 start ecosystem.config.cjs --env production --watch",
     "stop": "pm2 stop all",
     "dev": "nodemon server.js"
   },
