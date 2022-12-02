@@ -21,3 +21,14 @@ jobs:
           REMOTE_HOST: ec2-54-204-176-241.compute-1.amazonaws.com
           REMOTE_USER: ubuntu
           TARGET: /var/www/indybms
+
+      - name: Start Server
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          host: ec2-54-204-176-241.compute-1.amazonaws.com
+          username: ubuntu
+          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+          command: |
+          cd /var/www/indybms
+          npm install
+          npm start
