@@ -30,6 +30,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           command: |
-          cd /var/www/indybms
-          npm install
-          npm start
+            cd /var/www/indybms
+            npm install
+            npm start
