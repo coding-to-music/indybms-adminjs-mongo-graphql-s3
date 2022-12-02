@@ -106,6 +106,10 @@ app.post(
   }
 );
 
+app.get("/health", (req, res) => {
+  return res.status(200).json({ status: "up", request: req });
+});
+
 app.listen(port, () => {
   console.log("IndyBMS server listening on port", port);
 });
