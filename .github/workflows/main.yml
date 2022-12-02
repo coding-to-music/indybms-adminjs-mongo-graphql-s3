@@ -21,15 +21,3 @@ jobs:
           REMOTE_HOST: ec2-54-204-176-241.compute-1.amazonaws.com
           REMOTE_USER: ubuntu
           TARGET: /var/www/indybms
-
-      - name: Start Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ec2-54-204-176-241.compute-1.amazonaws.com
-          username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          command: |
-            cd /var/www/indybms
-            npm install
-            npm start
