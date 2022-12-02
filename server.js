@@ -107,7 +107,7 @@ app.post(
 );
 
 app.get("/health", (req, res) => {
-  return res.status(200).json({ status: "up", request: req });
+  return res.status(200).json({ status: "up" });
 });
 
 app.listen(port, () => {
