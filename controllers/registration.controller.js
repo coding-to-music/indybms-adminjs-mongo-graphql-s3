@@ -1,11 +1,11 @@
-import { Registration } from "../models/index.js";
+import { Registration, User, Event } from "../models/index.js";
 import { RegistrationValidation } from "../middleware/index.js";
 
 let Controller = {};
 
 Controller.getAllEventRegistrations = async (event, req) => {
   try {
-    let registrations = await Registration.find({ event: { $eq: event }});
+    let registrations = await Registration.find({ event: { $eq: event }}).populate('user');
     return registrations;
   } catch (err) {
     throw Error(err);
@@ -34,6 +34,8 @@ Controller.register = async (registration, req) => {
       user: registration.user,
       event: registration.event,
     });
+    await User.findByIdAndUpdate(registration.user, { $push: { registeredEvents: createdRegistration } });
+    await Event.findByIdAndUpdate(registration.event, { $push: { registrations: createdRegistration } });
     return createdRegistration;
   } catch (err) {
     throw Error(err);

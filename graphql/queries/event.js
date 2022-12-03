@@ -35,4 +35,17 @@ const searchEvents = {
   },
 };
 
-export { getAllEvents, event, searchEvents };
+const categoryEvents = {
+  type: new GraphQLList(EventType),
+  args: {
+    categoryId: {
+      name: "categoryId",
+      type: GraphQLString,
+    },
+  },
+  resolve: (_, { categoryId }, req) => {
+    return EventController.findEventByCategory(categoryId, req);
+  },
+};
+
+export { getAllEvents, event, searchEvents, categoryEvents };

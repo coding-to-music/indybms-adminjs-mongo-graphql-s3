@@ -1,4 +1,4 @@
-import { Event } from "../models/index.js";
+import { Event, User } from "../models/index.js";
 import { EventValidation } from "../middleware/index.js";
 
 let Controller = {};
@@ -27,6 +27,7 @@ Controller.createEvent = async (event, req) => {
       registrationFee: event.registrationFee,
       owner: req.token.id,
     });
+    await User.findByIdAndUpdate(req.token.id, { $push: { createdEvents: createdEvent } });
     return createdEvent;
   } catch (err) {
     throw Error(err);
@@ -78,6 +79,15 @@ Controller.findEventById = async (id, req) => {
   try {
     let foundEvent = await Event.findById(id).populate("owner").populate("category");
     return foundEvent;
+  } catch (err) {
+    throw Error(err);
+  }
+};
+
+Controller.findEventByCategory = async (category, req) => {
+  try {
+    let foundEvents = await Event.find({ category: { $eq: category } }).populate("owner").populate("category");
+    return foundEvents;
   } catch (err) {
     throw Error(err);
   }

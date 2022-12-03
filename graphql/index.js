@@ -6,6 +6,7 @@ import {
   event,
   getAllEvents,
   searchEvents,
+  categoryEvents,
   getAllEventRegistrationsQuery,
   getRegistrationQuery,
 } from "./queries/index.js";
@@ -28,6 +29,7 @@ const RootQuery = new GraphQLObjectType({
     event: event,
     allEvents: getAllEvents,
     searchEvents: searchEvents,
+    categoryEvents: categoryEvents,
     eventRegistrations: getAllEventRegistrationsQuery,
     registration: getRegistrationQuery,
   }),

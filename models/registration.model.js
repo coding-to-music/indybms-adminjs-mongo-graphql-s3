@@ -5,7 +5,6 @@ const RegistrationSchema = Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     name: {
       type: String,
