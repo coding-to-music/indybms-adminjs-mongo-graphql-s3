@@ -33,4 +33,33 @@ const authMiddleware = (req, res, next) => {
   });
 };
 
-export default authMiddleware;
+const authMiddlewareGraphQL = (resolve, parent, args, req, info) => {
+  let tokenToVerify;
+
+  if (req.header("Authorization")) {
+    const parts = req.header("Authorization").split(" ");
+
+    if (parts.length === 2) {
+      const scheme = parts[0];
+      const credentials = parts[1];
+
+      if (/^Bearer$/.test(scheme)) {
+        tokenToVerify = credentials;
+      } else {
+        throw new Error("Format for Authorization: Bearer [token]");
+      }
+    } else {
+      throw new Error("Format for Authorization: Bearer [token]");
+    }
+  } else {
+    throw new Error("No Authorization was found");
+  }
+
+  return verifyJWT(tokenToVerify, (err, thisToken) => {
+    if (err) throw new Error(err.message);
+    req.token = thisToken;
+    return resolve(parent, args, req, info);
+  });
+};
+
+export { authMiddleware, authMiddlewareGraphQL };

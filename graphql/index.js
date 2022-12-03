@@ -1,4 +1,5 @@
 import { GraphQLSchema, GraphQLObjectType } from "graphql";
+import { applyMiddleware } from 'graphql-middleware';
 import {
   getUserQuery,
   getAllCategoriesQuery,
@@ -17,31 +18,23 @@ import {
   updateEvent, 
   createRegistration,
 } from "./mutations/index.js";
+import { authMiddlewareGraphQL } from '../middleware/authentication.js'
+
+const middlewares = {
+  rootQuery: {
+    user: authMiddlewareGraphQL,
+    eventRegistrations: authMiddlewareGraphQL,
+    registration: authMiddlewareGraphQL,
+  },
+  rootMutation: {
+    updateUser: authMiddlewareGraphQL,
+    createCategory: authMiddlewareGraphQL,
+    createEvent: authMiddlewareGraphQL,
+    updateEvent: authMiddlewareGraphQL,
+  },
+};
 
 const RootQuery = new GraphQLObjectType({
-  name: "rootQuery",
-  description:
-    "This is the root query which holds all possible READ entrypoints for the GraphQL API",
-  fields: () => ({
-    allCategories: getAllCategoriesQuery,
-    category: getCategoryQuery,
-    event: event,
-    allEvents: getAllEvents,
-    searchEvents: searchEvents,
-    categoryEvents: categoryEvents,
-  }),
-});
-
-const RootMutation = new GraphQLObjectType({
-  name: "rootMutation",
-  description:
-    "This is the root mutation which holds all possible WRITE entrypoints for the GraphQL API",
-  fields: () => ({
-    registerForEvent: createRegistration,
-  }),
-});
-
-const SecureRootQuery = new GraphQLObjectType({
   name: "rootQuery",
   description:
     "This is the root query which holds all possible READ entrypoints for the GraphQL API",
@@ -58,7 +51,7 @@ const SecureRootQuery = new GraphQLObjectType({
   }),
 });
 
-const SecureRootMutation = new GraphQLObjectType({
+const RootMutation = new GraphQLObjectType({
   name: "rootMutation",
   description:
     "This is the root mutation which holds all possible WRITE entrypoints for the GraphQL API",
@@ -76,9 +69,9 @@ const schema = new GraphQLSchema({
   mutation: RootMutation,
 });
 
-const secureSchema = new GraphQLSchema({
-  query: SecureRootQuery,
-  mutation: SecureRootMutation,
-});
+const schemaWithMiddleware = applyMiddleware(
+  schema,
+  middlewares,
+)
 
-export { secureSchema, schema };
+export default schemaWithMiddleware;

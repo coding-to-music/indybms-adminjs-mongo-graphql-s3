@@ -6,11 +6,11 @@ import { config } from "dotenv";
 import compression from "compression";
 import session from "express-session";
 import { graphqlHTTP } from "express-graphql";
-import { schema, secureSchema } from "./graphql/index.js";
+import schema from "./graphql/index.js";
 import { admin } from "./controllers/admin.controller.js";
 import adminRoutes from "./routes/admin.routes.js";
 import authenticationRoutes from "./routes/authentication.routes.js";
-import authMiddleware from "./middleware/authentication.js";
+import { authMiddleware } from "./middleware/authentication.js";
 import { S3Client } from "@aws-sdk/client-s3";
 import multer from "multer";
 import multerS3 from "multer-s3";
@@ -52,15 +52,6 @@ app.use(
   "/graphql",
   graphqlHTTP({
     schema: schema,
-    graphiql: true,
-  })
-);
-
-app.use(
-  "/graphql/secure",
-  authMiddleware,
-  graphqlHTTP({
-    schema: secureSchema,
     graphiql: true,
   })
 );
