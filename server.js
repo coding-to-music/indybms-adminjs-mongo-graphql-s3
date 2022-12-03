@@ -6,7 +6,7 @@ import { config } from "dotenv";
 import compression from "compression";
 import session from "express-session";
 import { graphqlHTTP } from "express-graphql";
-import schema from "./graphql/index.js";
+import { schema, secureSchema } from "./graphql/index.js";
 import { admin } from "./controllers/admin.controller.js";
 import adminRoutes from "./routes/admin.routes.js";
 import authenticationRoutes from "./routes/authentication.routes.js";
@@ -50,9 +50,17 @@ app.use("/api", authenticationRoutes);
 
 app.use(
   "/graphql",
-  authMiddleware,
   graphqlHTTP({
     schema: schema,
+    graphiql: true,
+  })
+);
+
+app.use(
+  "/graphql/secure",
+  authMiddleware,
+  graphqlHTTP({
+    schema: secureSchema,
     graphiql: true,
   })
 );

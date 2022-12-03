@@ -23,6 +23,29 @@ const RootQuery = new GraphQLObjectType({
   description:
     "This is the root query which holds all possible READ entrypoints for the GraphQL API",
   fields: () => ({
+    allCategories: getAllCategoriesQuery,
+    category: getCategoryQuery,
+    event: event,
+    allEvents: getAllEvents,
+    searchEvents: searchEvents,
+    categoryEvents: categoryEvents,
+  }),
+});
+
+const RootMutation = new GraphQLObjectType({
+  name: "rootMutation",
+  description:
+    "This is the root mutation which holds all possible WRITE entrypoints for the GraphQL API",
+  fields: () => ({
+    registerForEvent: createRegistration,
+  }),
+});
+
+const SecureRootQuery = new GraphQLObjectType({
+  name: "rootQuery",
+  description:
+    "This is the root query which holds all possible READ entrypoints for the GraphQL API",
+  fields: () => ({
     user: getUserQuery,
     allCategories: getAllCategoriesQuery,
     category: getCategoryQuery,
@@ -35,7 +58,7 @@ const RootQuery = new GraphQLObjectType({
   }),
 });
 
-const RootMutation = new GraphQLObjectType({
+const SecureRootMutation = new GraphQLObjectType({
   name: "rootMutation",
   description:
     "This is the root mutation which holds all possible WRITE entrypoints for the GraphQL API",
@@ -53,4 +76,9 @@ const schema = new GraphQLSchema({
   mutation: RootMutation,
 });
 
-export default schema;
+const secureSchema = new GraphQLSchema({
+  query: SecureRootQuery,
+  mutation: SecureRootMutation,
+});
+
+export { secureSchema, schema };
