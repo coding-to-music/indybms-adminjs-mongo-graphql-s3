@@ -22,6 +22,7 @@ eventValidation.createEvent = data => {
 // Validation for Event Update
 eventValidation.updateEvent = data => {
   const schema = Joi.object({
+    id: Joi.string().required(),
     title: Joi.string(),
     description: Joi.string(),
     category: Joi.string(),

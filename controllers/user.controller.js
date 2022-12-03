@@ -61,7 +61,7 @@ Controller.updateUser = async (user, req) => {
     throw Error(error);
   }
   try {
-    let id = req.token._id;
+    let id = req.token.id;
     let updatedUser = await User.findByIdAndUpdate(
       id,
       {

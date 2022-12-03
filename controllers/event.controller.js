@@ -8,9 +8,10 @@ Controller.createEvent = async (event, req) => {
   if (error) {
     throw Error(error);
   }
-  if (req.token.privilege === "USER") {
-    throw Error("Not authorized to create event.");
-  }
+  // Need mechanism to update token if privilege is changed
+  // if (req.token.privilege === "USER") { 
+  //   throw Error("Not authorized to create event.");
+  // }
   try {
     let createdEvent = await Event.create({
       title: event.title,

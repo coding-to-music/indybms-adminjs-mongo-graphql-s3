@@ -7,13 +7,6 @@ const CategorySchema = Schema(
       type: String,
       required: true,
     },
-    // Events within a Category
-    events: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Event",
-      },
-    ],
   },
   { timestamps: true }
 );

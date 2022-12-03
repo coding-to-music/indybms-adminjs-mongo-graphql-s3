@@ -11,8 +11,8 @@ const createEvent = {
       type: EventInputType("create"),
     },
   },
-  resolve: async (_, { event }) => {
-    return EventController.createEvent(event);
+  resolve: async (_, { event }, req) => {
+    return EventController.createEvent(event, req);
   },
 };
 
@@ -25,8 +25,8 @@ const updateEvent = {
       type: EventInputType("update"),
     },
   },
-  resolve: async (_, { event }) => {
-    return EventController.updateEvent(event);
+  resolve: async (_, { event }, req) => {
+    return EventController.updateEvent(event, req);
   },
 };
 

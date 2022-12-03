@@ -48,7 +48,7 @@ const EventType = new GraphQLObjectType({
     // Need to confirm date type
     date: {
       type: GraphQLString,
-      resolve: (event) => event.startDate,
+      resolve: (event) => event.date,
     },
     ageRestriction: {
       type: GraphQLBoolean,
@@ -59,7 +59,7 @@ const EventType = new GraphQLObjectType({
       resolve: (event) => event.status,
     },
     registrationFee: {
-      type: GraphQLInt,
+      type: GraphQLFloat,
       resolve: (event) => event.registrationFee,
     },
     owner: {

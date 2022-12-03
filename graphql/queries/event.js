@@ -18,7 +18,7 @@ const event = {
     },
   },
   resolve: (_, { id }, req) => {
-    return EventController.getEventById(id, req);
+    return EventController.findEventById(id, req);
   },
 };
 
