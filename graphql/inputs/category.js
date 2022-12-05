@@ -7,6 +7,9 @@ const CategoryInputType = new GraphQLInputObjectType({
     name: {
       type: GraphQLString,
     },
+    image: {
+      type: GraphQLString,
+    },
   },
 });
 

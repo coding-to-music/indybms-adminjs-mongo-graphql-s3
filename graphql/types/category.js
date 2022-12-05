@@ -12,6 +12,10 @@ const CategoryType = new GraphQLObjectType({
       type: GraphQLString,
       resolve: (category) => category.name,
     },
+    image: {
+      type: GraphQLString,
+      resolve: (category) => category.image,
+    },
   }),
 });
 

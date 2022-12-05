@@ -7,6 +7,8 @@ categoryValidation.create = data => {
   const schema = Joi.object({
     name: Joi.string()
       .required(),
+    image: Joi.string()
+      .required(),
   });
   return schema.validate(data);
 };

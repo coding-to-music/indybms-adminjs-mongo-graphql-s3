@@ -29,6 +29,7 @@ Controller.createCategory = async (category, req) => {
   try {
     let createdCategory = await Category.create({
       name: category.name,
+      image: category.image,
     });
     return createdCategory;
   } catch (err) {

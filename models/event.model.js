@@ -39,9 +39,8 @@ const EventSchema = Schema(
     gallery: {
       type: [String],
     },
-    // Latitude, Longitude
     location: {
-      type: [Number],
+      type: String,
       required: true,
     },
     // Event Start Date and Time

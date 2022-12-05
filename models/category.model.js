@@ -7,6 +7,11 @@ const CategorySchema = Schema(
       type: String,
       required: true,
     },
+    // Image of the Category
+    image: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

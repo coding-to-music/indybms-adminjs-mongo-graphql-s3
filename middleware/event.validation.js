@@ -1,9 +1,9 @@
 import Joi from "joi";
 
-const eventValidation = {}
+const eventValidation = {};
 
 // Validation for Event Creation
-eventValidation.createEvent = data => {
+eventValidation.createEvent = (data) => {
   const schema = Joi.object({
     title: Joi.string().required(),
     description: Joi.string().required(),
@@ -11,7 +11,7 @@ eventValidation.createEvent = data => {
     maxAllowedRegistrations: Joi.number().min(1).required(),
     coverImage: Joi.string().required(),
     gallery: Joi.array().items(Joi.string()),
-    location: Joi.array().items(Joi.number()).required(),
+    location: Joi.string().required(),
     date: Joi.date().required(),
     ageRestriction: Joi.boolean(),
     registrationFee: Joi.number(),
@@ -20,7 +20,7 @@ eventValidation.createEvent = data => {
 };
 
 // Validation for Event Update
-eventValidation.updateEvent = data => {
+eventValidation.updateEvent = (data) => {
   const schema = Joi.object({
     id: Joi.string().required(),
     title: Joi.string(),
@@ -30,7 +30,7 @@ eventValidation.updateEvent = data => {
     coverImage: Joi.string(),
     status: Joi.string(),
     gallery: Joi.array().items(Joi.string()),
-    location: Joi.array().items(Joi.number()),
+    location: Joi.string().required(),
     date: Joi.date(),
     ageRestriction: Joi.boolean(),
     registrationFee: Joi.number(),

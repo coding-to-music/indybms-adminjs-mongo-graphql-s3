@@ -27,10 +27,10 @@ const admin = () =>
       {
         resource: Category,
         options: {
-          listProperties: ["_id", "name", "events", "createdAt", "updatedAt"],
-          filterProperties: ["_id", "name", "events", "createdAt", "updatedAt"],
-          editProperties: ["name", "events"],
-          showProperties: ["_id", "name", "events", "createdAt", "updatedAt"],
+          listProperties: ["_id", "name", "image", "createdAt", "updatedAt"],
+          filterProperties: ["_id", "name", "image", "createdAt", "updatedAt"],
+          editProperties: ["name", "image"],
+          showProperties: ["_id", "name", "image", "createdAt", "updatedAt"],
         },
       },
       {

@@ -40,9 +40,8 @@ const EventType = new GraphQLObjectType({
       type: new GraphQLList(GraphQLString),
       resolve: (event) => event.gallery,
     },
-    // Need to confirm location type
     location: {
-      type: new GraphQLList(GraphQLFloat),
+      type: GraphQLString,
       resolve: (event) => event.location,
     },
     // Need to confirm date type

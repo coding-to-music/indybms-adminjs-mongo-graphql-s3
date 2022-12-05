@@ -4,7 +4,7 @@ import {
   GraphQLString,
   GraphQLFloat,
   GraphQLBoolean,
-GraphQLList,
+  GraphQLList,
 } from "graphql";
 
 const EventInputType = (type) => {
@@ -29,7 +29,7 @@ const EventInputType = (type) => {
       type: new GraphQLList(GraphQLString),
     },
     location: {
-      type: new GraphQLList(GraphQLFloat),
+      type: GraphQLString,
     },
     date: {
       type: GraphQLString,
