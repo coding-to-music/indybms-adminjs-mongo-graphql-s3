@@ -1,5 +1,5 @@
 {
-  "name": "indybms-backend",
+  "name": "indybms-adminjs-mongo-graphql-s3",
   "version": "1.0.0",
   "main": "server.js",
   "repository": "git@github.com:RyanDsilva/indybms-backend.git",
@@ -9,6 +9,7 @@
     "hooks-install": "husky install",
     "start": "pm2 start ecosystem.config.cjs --env production --watch",
     "stop": "pm2 stop all",
+    "deploy": "git add . && git commit -m Build && git push",
     "dev": "nodemon server.js"
   },
   "type": "module",

@@ -1,3 +1,31 @@
+# indybms-adminjs-mongo-graphql-s3
+
+# 🚀 Event Management Application built with Node.js 🚀
+
+https://github.com/coding-to-music/indybms-adminjs-mongo-graphql-s3
+
+https://indybms-adminjs-mongo-graphql-s3.vercel.app
+
+From / By https://github.com/RyanDsilva/indybms-backend
+
+## Environment variables:
+
+```java
+
+```
+
+## GitHub
+
+```java
+git init
+git add .
+git remote remove origin
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:coding-to-music/indybms-adminjs-mongo-graphql-s3.git
+git push -u origin main
+```
+
 # IndyBMS Backend API
 
 Made using Node.js, Express, GraphQL and MongoDB
