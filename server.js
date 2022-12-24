@@ -1,26 +1,27 @@
 import express, { json } from "express";
-import logger from "morgan";
-import cors from "cors";
-import { connect } from "mongoose";
-import { config } from "dotenv";
-import compression from "compression";
-import session from "express-session";
-import { graphqlHTTP } from "express-graphql";
-import schema from "./graphql/index.js";
+
+import { S3Client } from "@aws-sdk/client-s3";
 import { admin } from "./controllers/admin.controller.js";
 import adminRoutes from "./routes/admin.routes.js";
-import authenticationRoutes from "./routes/authentication.routes.js";
 import { authMiddleware } from "./middleware/authentication.js";
-import { S3Client } from "@aws-sdk/client-s3";
+import authenticationRoutes from "./routes/authentication.routes.js";
+import compression from "compression";
+import { config } from "dotenv";
+import { connect } from "mongoose";
+import cors from "cors";
+import { graphqlHTTP } from "express-graphql";
+import logger from "morgan";
 import multer from "multer";
 import multerS3 from "multer-s3";
+import schema from "./graphql/index.js";
+import session from "express-session";
 
 const app = express();
 config();
 
 // Variables
 const port = process.env.PORT;
-const db = process.env.MONGODB;
+const db = process.env.MONGO_URI;
 
 // Database
 connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
@@ -58,17 +59,17 @@ app.use(
 
 // Image Upload
 const s3 = new S3Client({
-  region: process.env.REGION,
+  region: process.env.APP_AWS_S3_REGION,
   credentials: {
-    accessKeyId: process.env.ACCESS_KEY_ID,
-    secretAccessKey: process.env.SECRET_ACCESS_KEY,
+    accessKeyId: process.env.APP_AWS_S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.APP_AWS_S3_SECRET_ACCESS_KEY,
   },
 });
 const upload = multer({
   storage: multerS3({
     s3: s3,
     acl: "public-read",
-    bucket: process.env.BUCKET,
+    bucket: process.env.APP_AWS_S3_BUCKET_NAME,
     metadata: (req, file, cb) => {
       cb(null, { fieldName: file.fieldname });
     },
