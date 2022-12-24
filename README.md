@@ -8,10 +8,20 @@ https://indybms-adminjs-mongo-graphql-s3.vercel.app
 
 From / By https://github.com/RyanDsilva/indybms-backend
 
+https://github.com/RyanDsilva/indybms-frontend
+
 ## Environment variables:
 
 ```java
-
+PORT = 3000
+COOKIE_SECRET = indybms12345
+MONGO_URI = mongodb+srv://<username>:<password>@indybms.ajvxs5i.mongodb.net/indybms?retryWrites=true&w=majority
+JWT_SECRET = indybms12345
+MAILGUN_API_KEY = "lajdflasjdfsdl"
+APP_AWS_S3_REGION = us-east-1
+APP_AWS_S3_ACCESS_KEY_ID =
+APP_AWS_S3_SECRET_ACCESS_KEY =
+APP_AWS_S3_BUCKET_NAME = indybms-adminjs-mongo-graphql-s3
 ```
 
 ## GitHub
@@ -31,9 +41,11 @@ git push -u origin main
 Made using Node.js, Express, GraphQL and MongoDB
 
 ## Purpose and Target Audience
+
 IndyBMS is an event booking and discovery application targeted at local audiences that allow users to register for events in their neighborhood. The application contains the entire journey from event discovery to registration. Also, an organizer mode where locals can add events that would undergo a vetting process to verify their authenticity.
 
 ## Features Implemented
+
 1. User Login / Register
 2. Search for Events
 3. Find Events from Category
@@ -56,17 +68,22 @@ E: admin@indybms.com
 P: 1234567890
 
 ## Pre-Requisites
+
 1. Node.js 18 or above installed
 2. Yarn package manager installed
 
 ## Setup
+
 1. Install Dependencies
+
 ```sh
 yarn
 ```
+
 2. Copy contents of `.env.example` to `.env` and replace with correct values
 
 ### Run Local Server
+
 ```sh
 yarn dev
 ```
