@@ -1,7 +1,7 @@
 import { User } from "../models/index.js";
 import { UserValidation } from "../middleware/index.js";
-import { issueJWT } from "../utils/jwt.js";
 import bcrypt from "bcryptjs";
+import { issueJWT } from "../utils/jwt.js";
 
 let Controller = {};
 
@@ -42,15 +42,24 @@ Controller.login = async (req, res) => {
   try {
     const foundUser = await User.findOne({ email: user.email });
     const validPass = await bcrypt.compare(user.password, foundUser.password);
+    console.log("foundUser", foundUser);
+    console.log("validPass", validPass);
+    console.log("user.password", user.password);
+    console.log("foundUser.password", foundUser.password);
+
     if (!validPass) {
       return res.status(401).json("Username or Password is incorrect.");
     }
-    const token = issueJWT({ id: foundUser._id, privilege: foundUser.privilege });
+    const token = issueJWT({
+      id: foundUser._id,
+      privilege: foundUser.privilege,
+    });
     return res
       .header("Authorization", token)
       .status(200)
       .json({ id: foundUser._id, token: token });
   } catch (err) {
+    console.log(err);
     return res.status(500).json("Could not login: " + err);
   }
 };
