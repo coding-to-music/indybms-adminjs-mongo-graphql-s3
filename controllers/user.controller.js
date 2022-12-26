@@ -35,6 +35,9 @@ Controller.register = async (req, res) => {
 
 Controller.login = async (req, res) => {
   let user = req.body.user;
+  console.log("user ", user);
+  console.log("user.password", user.password);
+
   const { error } = UserValidation.login(user);
   if (error) {
     return res.status(401).json("Invalid Input: " + error);
